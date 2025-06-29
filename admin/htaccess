@@ -1,0 +1,23 @@
+# Настройки PHP для админ-панели
+php_value session.cookie_httponly 1
+php_value session.use_only_cookies 1
+php_value session.cookie_secure 0
+php_value session.gc_maxlifetime 3600
+php_value session.cookie_lifetime 3600
+
+# Устанавливаем кодировку
+AddDefaultCharset UTF-8
+
+# Безопасность - запрещаем доступ к конфигурационным файлам
+<Files "*.php">
+    Order allow,deny
+    Allow from all
+</Files>
+
+# Перенаправление на index.php если файл не найден
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^$ index.php [L]
+</IfModule> 
